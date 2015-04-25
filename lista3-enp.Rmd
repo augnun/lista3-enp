@@ -1,0 +1,86 @@
+---
+title: "Lista 3 - Estatística Não-Paramétrica"
+author: "Augusto Cesar Ribeiro Nunes - 13/0103004"
+date: "25 de abril de 2015"
+output: html_document
+---
+
+#Questão 1
+>The data in Table 3.3 are a subset of the data obtained by Kaneto, Kosaka, and Nakao (1967). The experiment investigated the effect of vagal nerve stimulation on insulin secretion. The subjects were mongrel dogs with varying body weights. Table 3.3 gives the amount of immunoreactive insulin in pancreatic venous plasma just before stimulation of the left vagus nerve (X) and the amount measured 5min after stimulation (Y ) for seven dogs. Test the hypothesis of no effect against the alternative that stimulation of the vagus nerve increases the blood level of immunoreactive insulin.
+
+##Hipóteses
+  $H_0: \theta = 0$
+  
+  $H_1: \theta > 0$
+
+##Estatística de Teste
+|Paciente i | $X_i$ | $Y_i$ |  Z   | mod(Z) | R | $\psi$|
+|-----------|------:|------:|-----:|-------:|--:|------:|
+|1          |  350  |  480  | 130  |130     | 5 |  1    |
+|2          |  200  |  130  | -70  | 70     | 4 |  0    |
+|3          |  240  |  250  |10    | 10     | 1 |  1    |
+|4          |  290  |  310  |20    | 20     | 2 |  1    |
+|5          |   90  |  280  | 190  |190     | 6 |  1    |
+|6          |  370  | 1450  |1080  |1080    | 7 |  1    |
+|7          |  240  |  280  | 40   | 40     | 3 |  1    |
+
+
+$T^{+} = 23$, e seu p-valor é igual a `r psignrank(23,7,lower.tail=F)`.
+
+##Conclusão
+  Com p-valor = `r psignrank(23,7,lower.tail=F)`, estatisticamente o tratamento não produziu efeito significativo, ou seja, a estimulação no nervo vagal não aumentou a secreção de insulina nos cachorroros.
+  Na verdade, como esse p-valor é limítrofe em relação à escolha usual de 0.05, poderíamos ficar desconfortáveis em relação à tomada de decisão, ainda com mais razão dado que o exemplo dado se refere a um contexto médico.
+
+
+
+#Questão 2 
+> Change the value of $X_3$ , in Table 3.1, from 1.62 to 16.2. What effect does this outlying observation have on the calculations performed in Example 3.1? What does this suggest about the relative insensitivity of the signed rank tests to outliers? Construct an example in which changing one observation has a marked effect on the final decision regarding rejection or acceptance of $H_0$.
+
+|Paciente i | $X_i$ | $Y_i$ |  Z   | mod(Z) | R | $\psi$|
+|-----------|------:|------:|-----:|-------:|--:|------:|
+|1          |  1,83 |0,878  |-0,952|0,952   |8  |  0    |
+|2          |  0,50 |0,647  |0,147 |0,147   |3  |  1    |
+|3          |  16,2 |0,598  |-1,022|1,022   |9  |  0    |
+|4          |  2,48 | 2,05  |-0,43 |0,43    |4  |  0    |
+|5          |  1,68 | 1,06  |-0,62 |0,62    |7  |  0    |
+|6          |  1,88 | 1,29  |-0,59 |0,59    |6  |  0    |
+|7          |  1,55 | 1,06  |-0,49 |0,49    |5  |  0    |
+|8          |  3,06 | 3,14  |0,08  |0,08    |2  |  1    |
+|9          |  1,30 | 1,29  |-0,01 |0,01    |1  |  0    |
+
+  Com os valores acima, o teste nos dá o p-valor de 0,9863. Então, ao contrário do ocorrido no exemplo original, esse conjunto de dados não nos possibilita rejeitar a hipótese nula.
+  Além disso, o resultado sugere que o Teste de Wilcoxon é pouco insensível a _outliers_, já que nos deu um resultado oposto ao original apenas modificando uma das observações. Nesse exemplo em particular, como as observações se baseiam no Fator IV da Escala de Depressão de Hamilton, a interpretação das observações pós e pré tratamento, em particular um _outlier_ de grande magnitude numa observação pré tratamento, deveria nos dar ainda mais confiança na eficácia do tratamento, o que ilustra a insensibilidade do teste. 
+  Como outro contraexemplo, considere o conjunto de dados pareados da tabela 3.3, citada na __Questão 1__ acima, apenas modificando-se o valor de $Y_6$ para 2. O teste com essa modificação nos daria um p-valor de 0,3438, e então não rejeitaríamos a hipótese nula com mais segurança.
+
+
+
+#Questão 4
+> August, Hung, and Houck (1974) studied collagen metabolism in children deficient in growth
+hormone before and after growth hormone therapy. The data in Table 3.4 are the values of
+heat-insoluble hydroxyproline in the skin of children before and 3 months after growth hormone
+therapy. Can we conclude on the basis of these data that growth hormone therapy increases
+heat-insoluble hydroxyproline in the skin?
+
+##Hipóteses
+  $H_0: \theta = 0$
+  
+  $H_1: \theta > 0$
+  
+##Teste e Conclusão
+  Note que o caso da criança 6 é um empate do tipo $Z_i = 0$, então descartamos o indivíduo 6 da amostra e reconsideramos a amostra com n = 6. Com esta amostra excluído o empate, temos um p-valor de 0,4219, que não nos possibilita rejeitar a hipótese nula, e então a terapia com hormônio do crescimento não aumenta a densidade de hidroxiprolina insolúvel ao calor na pele.
+  
+  
+  
+#Questão 7 
+> Consider the case n = 8 and use the R command psignrank(0:18,8,lower.tail=T) to
+produce the lower-tail probabilities of the null distribution of $T^{+}$ . What are the possible $\alpha$
+values between .05 and .10? Compare the $\alpha$ = .055 test of $H_0$ : $\theta$ = 0 versus $H_2$ : $\theta$ < 0 with the corresponding $\alpha$ = .055 test based on the large-sample approximation.
+
+  São aceitáveis $\alpha_6 = 0,05468750$, $\alpha_7 = 0,7421875$ e $\alpha_8 = 0,09765625$. 
+  
+  
+
+#Questão 10
+> Apply the large-sample approximation test of H 0 : θ = 5 versus H 1 : θ > 5 based on T + to
+the beak-clapping data in Table 3.5. What is the P-value?
+
