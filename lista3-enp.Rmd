@@ -2,7 +2,7 @@
 title: "Lista 3 - Estatística Não-Paramétrica"
 author: "Augusto Cesar Ribeiro Nunes - 13/0103004"
 date: "25 de abril de 2015"
-output: html_document
+output: pdf_document
 ---
 
 #Questão 1
@@ -73,14 +73,14 @@ heat-insoluble hydroxyproline in the skin?
   
 #Questão 7 
 > Consider the case n = 8 and use the R command psignrank(0:18,8,lower.tail=T) to
-produce the lower-tail probabilities of the null distribution of $T^{+}$ . What are the possible $\alpha$
-values between .05 and .10? Compare the $\alpha$ = .055 test of $H_0$ : $\theta$ = 0 versus $H_2$ : $\theta$ < 0 with the corresponding $\alpha$ = .055 test based on the large-sample approximation.
+produce the lower-tail probabilities of the null distribution of $T^{+}$ . What are the possible $\alpha$ values between .05 and .10? Compare the $\alpha$ = .055 test of $H_0$ : $\theta$ = 0 versus $H_2$ : $\theta$ < 0 with the corresponding $\alpha$ = .055 test based on the large-sample approximation.
 
-  São aceitáveis $\alpha_6 = 0,05468750$, $\alpha_7 = 0,7421875$ e $\alpha_8 = 0,09765625$. 
+  São aceitáveis $\alpha_6 = 0,05468750$, $\alpha_7 = 0,7421875$ e $\alpha_8 = 0,09765625$. Em particular, se considerarmos $\alpha = 0.055$, teríamos $T^{+} = 6$ para o teste exato, mas se utilizássemos a aproximação para grandes amostras, teríamos que ter $T^{+} = 29$.
   
   
 
 #Questão 10
-> Apply the large-sample approximation test of H 0 : θ = 5 versus H 1 : θ > 5 based on T + to
+> Apply the large-sample approximation test of $H_0$ : $\theta$ = 5 versus $H_1$ : $\theta$ > 5 based on $T^{+}$ to
 the beak-clapping data in Table 3.5. What is the P-value?
 
+  Temos p-valor = 1.14e-17, o que nos permite rejeitar $H_0$ com um nível de significância relevante. Para a aproximação de grandes amostras não tratamos de maneira especial o fato de haver empate nesta amostra em $Z_{18}$ e $Z_{22}$.
